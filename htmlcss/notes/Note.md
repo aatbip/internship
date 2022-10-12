@@ -29,8 +29,13 @@ NOTES:
    <ol> , <ul> , <dl>
    <article> , <section> , <div> 
 
+   occupying complete width of the canvas 
+
+
 ** Inline elements: 
    <a> <strong> , <em> , <b> , <i> , <q>, <mark> 
+
+   occupying width upto the size of the rendered element
 
 ** If more than one elements are there in any component then collect them
    in a separate "div" tag. 
