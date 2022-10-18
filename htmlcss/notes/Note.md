@@ -52,3 +52,5 @@ NOTES:
 
 
 ** extensions: prettier, live server 
+
+PIXEL PERFECT!!! 
