@@ -5,55 +5,59 @@ import AddNewTask from "./component/AddNewTask";
 import DisplayTask from "./component/DisplayTask";
 import Filter from "./component/Filter";
 
-let items = JSON.parse(localStorage.getItem("tasks"));
+let tasks = localStorage.getItem("task");
+
 const App = () => {
-  const [initialState, setInitialState] = React.useState(items || []);
+  //useState
+  const [initialState, setInitialState] = React.useState(
+    JSON.parse(tasks) || []
+  );
   const [filterValue, setFilterValue] = React.useState([]);
 
   React.useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(initialState));
+    localStorage.setItem("task", JSON.stringify(initialState));
   }, [initialState]);
 
   const appendTask = (task) => {
-    setInitialState((prev) => {
+    setInitialState((previous) => {
       return [
-        ...prev,
+        ...previous,
         {
-          tasks: task,
+          task: task,
           isCompleted: false,
         },
       ];
     });
   };
 
-  const updateComplete = (task) => {
-    setInitialState((prev) => {
-      return prev.map((el) => {
-        if (el.tasks === task) {
+  const markComplete = (task) => {
+    setInitialState((previous) => {
+      return previous.map((value) => {
+        if (value.task === task) {
           return {
-            ...el,
-            isCompleted: !el.isCompleted,
+            ...value,
+            isCompleted: !value.isCompleted,
           };
         } else {
-          return el;
+          return value;
         }
       });
     });
   };
 
-  const filterData = (e) => {
-    if (e.target.name === "filter") {
-      if (e.target.value) {
+  const filterTask = (event) => {
+    if (event.target.name === "filter") {
+      if (event.target.value) {
         setFilterValue(() => {
           return initialState.filter((el) => {
-            return el.tasks.includes(e.target.value);
+            return el.task.includes(event.target.value);
           });
         });
       } else {
         setFilterValue([]);
       }
-    } else if (e.target.name === "check") {
-      if (e.target.checked === true) {
+    } else if (event.target.name === "check") {
+      if (event.target.checked === true) {
         setFilterValue(() => {
           return initialState.filter((el) => el.isCompleted === true);
         });
@@ -67,10 +71,10 @@ const App = () => {
     <>
       <h1>TODO APP</h1>
       <AddNewTask appendTask={appendTask} />
-      <Filter filterData={filterData} />
+      <Filter filterTask={filterTask} />
       <DisplayTask
         initialState={filterValue.length > 0 ? filterValue : initialState}
-        updateComplete={updateComplete}
+        markComplete={markComplete}
       />
     </>
   );

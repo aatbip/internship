@@ -1,9 +1,9 @@
 import React from "react";
 
-const DisplayTask = ({ initialState, updateComplete }) => {
+const DisplayTask = ({ initialState, markComplete }) => {
   const styles = {
     markedTask: {
-      color: "red",
+      textDecorationLine: "line-through",
     },
   };
   return (
@@ -14,19 +14,16 @@ const DisplayTask = ({ initialState, updateComplete }) => {
           <th>Mark Done</th>
         </tr>
 
-        {initialState.map((value) => {
+        {initialState.map((el) => {
           return (
             <>
-              <tr style={{ display: "flex", justifyContent: "space-between" }}>
-                <td style={value.isCompleted ? styles.markedTask : null}>
-                  {value.tasks}
-                </td>
+              <tr>
+                <td>{el.task}</td>
                 <td>
                   <input
                     type="checkbox"
-                    key={value.tasks}
-                    checked={value?.isCompleted}
-                    onClick={() => updateComplete(value.tasks)}
+                    checked={el.isCompleted}
+                    onClick={() => markComplete(el.task)}
                   />
                 </td>
               </tr>

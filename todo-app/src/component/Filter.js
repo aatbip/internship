@@ -1,10 +1,15 @@
 import React from "react";
 
-const Filter = ({ filterData }) => {
+const Filter = ({ filterTask }) => {
   return (
     <>
-      <input type="text" name="filter" placeholder="filter" onChange={(e) => filterData(e)}/>
-      <input type="checkbox" name="check" onChange={(e) => filterData(e)} />
+      <input
+        type="text"
+        name="filter"
+        placeholder="filter"
+        onChange={(e) => filterTask(e)}
+      />
+      <input type="checkbox" name="check" onChange={(e) => filterTask(e)} />
     </>
   );
 };
